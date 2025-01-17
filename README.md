@@ -19,3 +19,5 @@ Funcționalitaile Principale Implementate:
 -Structura Modulara
 
 -Fisiere separate pentru antet (header.php) și subsol (footer.php) pentru organizare si reutilizare.
+
+Notes:daca am div-uri puse aiurea nu sunt obisnuit cu bootstrap ,am vrut sa vad cum e 
