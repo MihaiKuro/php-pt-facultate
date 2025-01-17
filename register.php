@@ -5,7 +5,7 @@ if(isset($_SESSION['user_id'])){
     header('Location: index.php');
     exit;
 }
-
+//Initializare variabile
 $first_name = "";
 $last_name = "";
 $email = "";
@@ -13,7 +13,7 @@ $password = "";
 $confirm_password = "";
 $address = "";
 $phone= "";
-
+// Variabile pentru mesaje de eroare
 $first_name_error = "";
 $last_name_error = "";
 $email_error = "";
@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $confirm_password = $_POST['confirm_password'];
     $address = $_POST['address'];
     $phone = $_POST['phone_number'];
-
+    
+// Verificari pentru campurile obligatorii
     if (empty($first_name)){
         $first_name_error = "First name is required";
         $error = true;
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $email_error = "Email is invalid";
         $error = true;
     }
+    
     include 'utilities/db.php';
     $conn = db_connect();
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
@@ -54,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $stmt->execute();
 
     $result = $stmt->store_result();
+// Verificare daca email-ul exista deja
     if ($stmt->num_rows > 0){
         $email_error = "Email already exists";
         $error = true;
