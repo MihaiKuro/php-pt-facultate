@@ -1,7 +1,7 @@
 <?php
 
 include "layout/header.php";
-
+//aca exista o sesiune activa pentru utilizator, redirectioneaza spre pagina principala
 if(isset($_SESSION['email'])){
     header('Location: index.php');
     exit;
@@ -25,8 +25,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         $stmt->bind_result($id, $first_name, $last_name, $email, $hashed_password, $created_at);
 
-        if($stmt->fetch()){
-            if(password_verify($password, $hashed_password)){
+        if($stmt->fetch()){// Daca utilizatorul exista in baza de date
+            //Verifica daca parola introdusa este corecta folosind password_verify
+            if(password_verify($password, $hashed_password)){ //Verifica daca parola introdusa este corecta folosind password_verify
                 $_SESSION['user_id'] = $id;
                 $_SESSION['first_name'] = $first_name;
                 $_SESSION['last_name'] = $last_name;
@@ -53,6 +54,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php } ?>
+    <!-- Formularul de login -->
         <form action="login.php" method="POST">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
